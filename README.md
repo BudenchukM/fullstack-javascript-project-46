@@ -2,3 +2,5 @@
 [![Actions Status](https://github.com/BudenchukM/fullstack-javascript-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/BudenchukM/fullstack-javascript-project-46/actions)
 [![hexlet-check](https://github.com/BudenchukM/fullstack-javascript-project-46/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/BudenchukM/fullstack-javascript-project-46/actions/workflows/hexlet-check.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=BudenchukM_fullstack-javascript-project-46&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=BudenchukM_fullstack-javascript-project-46)
+[![Maintainability](https://api.codeclimate.com/v1/badges/e40deebb55b9119dadac/maintainability)](https://codeclimate.com/github/BudenchukM/fullstack-javascript-project-46/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/e40deebb55b9119dadac/test_coverage)](https://codeclimate.com/github/BudenchukM/fullstack-javascript-project-46/test_coverage)
