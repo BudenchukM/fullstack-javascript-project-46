@@ -1,0 +1,116 @@
+[
+    {
+        "name": "common",
+        "children": [
+            {
+                "name": "follow",
+                "value": false,
+                "type": "plus"
+            },
+            {
+                "name": "setting1",
+                "value": "Value 1",
+                "type": "unchanged"
+            },
+            {
+                "name": "setting2",
+                "value": 200,
+                "type": "minus"
+            },
+            {
+                "name": "setting3",
+                "firstValue": true,
+                "secondValue": null,
+                "type": "changed"
+            },
+            {
+                "name": "setting4",
+                "value": "blah blah",
+                "type": "plus"
+            },
+            {
+                "name": "setting5",
+                "value": {
+                    "key5": "value5"
+                },
+                "type": "plus"
+            },
+            {
+                "name": "setting6",
+                "children": [
+                    {
+                        "name": "doge",
+                        "children": [
+                            {
+                                "name": "wow",
+                                "firstValue": "",
+                                "secondValue": "so much",
+                                "type": "changed"
+                            }
+                        ],
+                        "type": "subtree"
+                    },
+                    {
+                        "name": "key",
+                        "value": "value",
+                        "type": "unchanged"
+                    },
+                    {
+                        "name": "ops",
+                        "value": "vops",
+                        "type": "plus"
+                    }
+                ],
+                "type": "subtree"
+            }
+        ],
+        "type": "subtree"
+    },
+    {
+        "name": "group1",
+        "children": [
+            {
+                "name": "baz",
+                "firstValue": "bas",
+                "secondValue": "bars",
+                "type": "changed"
+            },
+            {
+                "name": "foo",
+                "value": "bar",
+                "type": "unchanged"
+            },
+            {
+                "name": "nest",
+                "firstValue": {
+                    "key": "value"
+                },
+                "secondValue": "str",
+                "type": "changed"
+            }
+        ],
+        "type": "subtree"
+    },
+    {
+        "name": "group2",
+        "value": {
+            "abc": 12345,
+            "deep": {
+                "id": 45
+            }
+        },
+        "type": "minus"
+    },
+    {
+        "name": "group3",
+        "value": {
+            "deep": {
+                "id": {
+                    "number": 45
+                }
+            },
+            "fee": 100500
+        },
+        "type": "plus"
+    }
+]
