@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { parseFile } from './parsers.js';
+import buildDiff from './diffBuilder.js';
 
 const buildDiff = (data1, data2) => {
   const keys = _.sortBy(_.union(_.keys(data1), _.keys(data2)));
@@ -21,11 +22,10 @@ const buildDiff = (data1, data2) => {
   }).join('\n');
 };
 
-const genDiff = (filepath1, filepath2) => {
+const genDiff = (filepath1, filepath2, format = 'stylish') => {
   const data1 = parseFile(filepath1);
   const data2 = parseFile(filepath2);
-  const diff = buildDiff(data1, data2);
-  return `{\n${diff}\n}`;
+  return buildDiff(data1, data2, format);
 };
 
 export default genDiff;
