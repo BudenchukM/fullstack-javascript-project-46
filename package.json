@@ -22,6 +22,7 @@
   "homepage": "https://github.com/BudenchukM/fullstack-javascript-project-46#readme",
   "keywords": [],
   "dependencies": {
-    "commander": "^13.1.0"
+    "commander": "^13.1.0",
+    "lodash": "^4.17.21"
   }
 }
