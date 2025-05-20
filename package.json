@@ -8,7 +8,15 @@
     "gendiff": "bin/gendiff.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+     "test:watch": "npm test -- --watch",
+     "lint": "eslint .",
+     "coverage": "npm test -- --coverage"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "collectCoverageFrom": ["src/**/*.js"],
+    "coveragePathIgnorePatterns": ["/node_modules/"]
   },
   "repository": {
     "type": "git",
@@ -24,5 +32,15 @@
   "dependencies": {
     "commander": "^13.1.0",
     "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.26.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^9.26.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-prettier": "^5.4.0",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^16.1.0",
+    "prettier": "3.5.3"
   }
 }
