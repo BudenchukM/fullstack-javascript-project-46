@@ -13,4 +13,4 @@
 
 https://asciinema.org/a/IbJzLqRrtBWvtsNuCZnHHfl8P
 
-<script src="https://asciinema.org/a/65OziYILxNhn44TgqIfTLDVPW.js" id="asciicast-65OziYILxNhn44TgqIfTLDVPW" async="true"></script>
+https://asciinema.org/a/65OziYILxNhn44TgqIfTLDVPW
