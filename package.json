@@ -8,15 +8,19 @@
     "gendiff": "bin/gendiff.js"
   },
   "scripts": {
-     "test": "NODE_OPTIONS=--experimental-vm-modules jest",
-     "test:watch": "npm test -- --watch",
-     "lint": "eslint .",
-     "coverage": "npm test -- --coverage"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "test:watch": "npm test -- --watch",
+    "lint": "eslint .",
+    "coverage": "npm test -- --coverage"
   },
   "jest": {
     "testEnvironment": "node",
-    "collectCoverageFrom": ["src/**/*.js"],
-    "coveragePathIgnorePatterns": ["/node_modules/"]
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   },
   "repository": {
     "type": "git",
@@ -31,6 +35,7 @@
   "keywords": [],
   "dependencies": {
     "commander": "^13.1.0",
+    "js-yaml": "^4.1.0",
     "lodash": "^4.17.21"
   },
   "devDependencies": {

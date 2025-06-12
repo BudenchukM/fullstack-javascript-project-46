@@ -1,19 +1,9 @@
-import fs from 'fs';
-import path from 'path';
 import _ from 'lodash';
-
-const getFileContent = (filepath) => {
-  const absolutePath = path.resolve(process.cwd(), filepath);
-  const content = fs.readFileSync(absolutePath, 'utf-8');
-  return JSON.parse(content);
-};
+import getFileContent from './parsers.js';
 
 const buildDiff = (data1, data2) => {
-  const keys1 = Object.keys(data1);
-  const keys2 = Object.keys(data2);
-  const sortedKeys = _.sortBy(_.union(keys1, keys2));
-
-  return sortedKeys.map((key) => {
+  const keys = _.sortBy(_.union(_.keys(data1), _.keys(data2)));
+  return keys.map((key) => {
     if (!_.has(data2, key)) {
       return { key, value: data1[key], type: 'removed' };
     }
