@@ -12,3 +12,5 @@
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=BudenchukM_fullstack-javascript-project-46&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=BudenchukM_fullstack-javascript-project-46)
 
 https://asciinema.org/a/IbJzLqRrtBWvtsNuCZnHHfl8P
+
+<script src="https://asciinema.org/a/65OziYILxNhn44TgqIfTLDVPW.js" id="asciicast-65OziYILxNhn44TgqIfTLDVPW" async="true"></script>
