@@ -2,39 +2,36 @@ import { readFileSync, readdirSync } from 'fs';
 import path from 'path';
 import { safeLoad } from 'js-yaml';
 
-// Сначала определяем все вспомогательные функции
-const parseJson = (content) => JSON.parse(content);
-const parseYaml = (content) => safeLoad(content);
-
 const getFileContent = (filepath) => {
-  const absolutePath = path.resolve(process.cwd(), filepath);
+  // Автоматически добавляем __fixtures__ если путь относительный
+  const resolvedPath = filepath.startsWith('__fixtures__/') 
+    ? filepath 
+    : `__fixtures__/${filepath}`;
+  
+  const absolutePath = path.resolve(process.cwd(), resolvedPath);
   
   try {
     return readFileSync(absolutePath, 'utf-8');
   } catch (error) {
-    const fixturePath = path.join(process.cwd(), '__fixtures__');
-    const files = readdirSync(fixturePath);
+    const fixtureDir = path.join(process.cwd(), '__fixtures__');
+    const files = readdirSync(fixtureDir);
     throw new Error(
       `Cannot read file at: ${absolutePath}\n` +
-      `Available files in __fixtures__:\n${files.map(f => `- ${f}`).join('\n')}`
+      `Available files in __fixtures__:\n${files.map(f => `- ${f}`).join('\n')}\n` +
+      `Try: gendiff __fixtures__/file1.json __fixtures__/file2.json`
     );
   }
 };
 
-// Главная функция парсера
 const parse = (content, format) => {
   switch (format) {
-    case 'json':
-      return parseJson(content);
+    case 'json': return JSON.parse(content);
     case 'yml':
-    case 'yaml':
-      return parseYaml(content);
-    default:
-      throw new Error(`Unsupported format: ${format}`);
+    case 'yaml': return safeLoad(content);
+    default: throw new Error(`Unsupported format: ${format}`);
   }
 };
 
-// Экспортируемая функция
 export default (filepath) => {
   const content = getFileContent(filepath);
   const extension = path.extname(filepath).slice(1);
