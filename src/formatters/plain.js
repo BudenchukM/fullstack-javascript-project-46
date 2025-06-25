@@ -1,31 +1,40 @@
-const stringify = (value) => {
+const stringify = (value, depth) => {
   if (typeof value !== 'object' || value === null) {
-    return typeof value === 'string' ? `'${value}'` : String(value);
+    return value === null ? 'null' : String(value);
   }
-  return '[complex value]';
+
+  const indent = ' '.repeat((depth + 1) * 4);
+  const lines = Object.entries(value)
+    .map(([key, val]) => `${indent}${key}: ${stringify(val, depth + 1)}`);
+
+  return `{\n${lines.join('\n')}\n${' '.repeat(depth * 4)}}`;
 };
 
-const formatPlain = (diff, path = '') => {
-  const lines = diff.flatMap((node) => {
-    const currentPath = path ? `${path}.${node.key}` : node.key;
-    
+const formatStylish = (diff, depth = 1) => {
+  const indent = ' '.repeat(depth * 4 - 2);
+  const bracketIndent = ' '.repeat((depth - 1) * 4);
+
+  const lines = diff.map((node) => {
     switch (node.type) {
       case 'added':
-        return `Property '${currentPath}' was added with value: ${stringify(node.value)}`;
+        return `${indent}+ ${node.key}: ${stringify(node.value, depth)}`;
       case 'removed':
-        return `Property '${currentPath}' was removed`;
-      case 'changed':
-        return `Property '${currentPath}' was updated. From ${stringify(node.oldValue)} to ${stringify(node.newValue)}`;
-      case 'nested':
-        return formatPlain(node.children, currentPath);
+        return `${indent}- ${node.key}: ${stringify(node.value, depth)}`;
       case 'unchanged':
-        return [];
+        return `${indent}  ${node.key}: ${stringify(node.value, depth)}`;
+      case 'changed':
+        return [
+          `${indent}- ${node.key}: ${stringify(node.oldValue, depth)}`,
+          `${indent}+ ${node.key}: ${stringify(node.newValue, depth)}`,
+        ].join('\n');
+      case 'nested':
+        return `${indent}  ${node.key}: ${formatStylish(node.children, depth + 1)}`;
       default:
         throw new Error(`Unknown node type: ${node.type}`);
     }
   });
 
-  return lines.join('\n');
+  return `{\n${lines.join('\n')}\n${bracketIndent}}`;
 };
 
-export default formatPlain;
+export default formatStylish;
