@@ -3,23 +3,29 @@ import path from 'path';
 import { safeLoad } from 'js-yaml';
 
 const getFileContent = (filepath) => {
-  // Автоматически добавляем __fixtures__ если путь относительный
-  const resolvedPath = filepath.startsWith('__fixtures__/') 
-    ? filepath 
-    : `__fixtures__/${filepath}`;
+  // Нормализуем путь (убираем лишние слеши и т.д.)
+  const normalizedPath = path.normalize(filepath);
   
-  const absolutePath = path.resolve(process.cwd(), resolvedPath);
-  
+  // Определяем абсолютный путь
+  const absolutePath = path.isAbsolute(normalizedPath)
+    ? normalizedPath
+    : path.resolve(process.cwd(), normalizedPath);
+
   try {
     return readFileSync(absolutePath, 'utf-8');
   } catch (error) {
+    // Если файл не найден, показываем доступные файлы в фикстурах
     const fixtureDir = path.join(process.cwd(), '__fixtures__');
-    const files = readdirSync(fixtureDir);
-    throw new Error(
-      `Cannot read file at: ${absolutePath}\n` +
-      `Available files in __fixtures__:\n${files.map(f => `- ${f}`).join('\n')}\n` +
-      `Try: gendiff __fixtures__/file1.json __fixtures__/file2.json`
-    );
+    try {
+      const files = readdirSync(fixtureDir);
+      throw new Error(
+        `Cannot read file at: ${absolutePath}\n` +
+        `Available files in __fixtures__:\n${files.map(f => `- ${f}`).join('\n')}\n` +
+        `Try: gendiff __fixtures__/file1.json __fixtures__/file2.json`
+      );
+    } catch (dirError) {
+      throw new Error(`Cannot read file at: ${absolutePath}\nAlso failed to read __fixtures__ directory`);
+    }
   }
 };
 
