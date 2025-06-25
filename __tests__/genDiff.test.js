@@ -36,5 +36,5 @@ describe('genDiff', () => {
   const result = genDiff(file1, file2, 'json');
   expect(() => JSON.parse(result)).not.toThrow();
   expect(result).toMatchSnapshot();
-});
-});
+  })
+})
