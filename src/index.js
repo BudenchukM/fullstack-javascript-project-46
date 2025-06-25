@@ -4,6 +4,10 @@ import getFormatter from './formatters/index.js';
 
 
 export default (filepath1, filepath2, formatName = 'stylish') => {
+  if (typeof formatName !== 'string') {
+    throw new Error(`Format name must be a string, received: ${typeof formatName}`);
+  }
+  const formatter = getFormatter(formatName);
   const data1 = parse(filepath1);
   const data2 = parse(filepath2);
   const diff = buildDiff(data1, data2);
@@ -15,7 +19,6 @@ export default (filepath1, filepath2, formatName = 'stylish') => {
       return formatJson(diff);
     case 'stylish':
   default:
-    const formatter = getFormatter(format); // Получаем форматтер
     return formatter(diff); // Используем его
   }
 };
