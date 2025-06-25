@@ -1,12 +1,10 @@
 import { readFileSync, readdirSync } from 'fs';
 import path from 'path';
-import { safeLoad } from 'js-yaml';
+import { load } from 'js-yaml'; // Заменили safeLoad на load
 
 const getFileContent = (filepath) => {
-  // Нормализуем путь (убираем лишние слеши и т.д.)
   const normalizedPath = path.normalize(filepath);
   
-  // Определяем абсолютный путь
   const absolutePath = path.isAbsolute(normalizedPath)
     ? normalizedPath
     : path.resolve(process.cwd(), normalizedPath);
@@ -14,7 +12,6 @@ const getFileContent = (filepath) => {
   try {
     return readFileSync(absolutePath, 'utf-8');
   } catch (error) {
-    // Если файл не найден, показываем доступные файлы в фикстурах
     const fixtureDir = path.join(process.cwd(), '__fixtures__');
     try {
       const files = readdirSync(fixtureDir);
@@ -31,10 +28,13 @@ const getFileContent = (filepath) => {
 
 const parse = (content, format) => {
   switch (format) {
-    case 'json': return JSON.parse(content);
+    case 'json':
+      return JSON.parse(content);
     case 'yml':
-    case 'yaml': return safeLoad(content);
-    default: throw new Error(`Unsupported format: ${format}`);
+    case 'yaml':
+      return load(content); // Используем load вместо safeLoad
+    default:
+      throw new Error(`Unsupported format: ${format}`);
   }
 };
 
