@@ -9,6 +9,9 @@ const formatters = {
 };
 
 const getFormatter = (formatName) => {
+  if (typeof formatName !== 'string') {
+    throw new Error(`Format name must be a string, received: ${typeof formatName}`);
+  }
   const formatter = formatters[formatName];
   if (!formatter) {
     throw new Error(`Unknown format: ${formatName}`);
