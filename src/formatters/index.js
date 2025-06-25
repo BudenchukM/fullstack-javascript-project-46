@@ -6,7 +6,7 @@ const formatters = {
   stylish: formatStylish,
   plain: formatPlain,
   json: formatJson,
-};
+}
 
 const getFormatter = (formatName) => {
   if (typeof formatName !== 'string') {
