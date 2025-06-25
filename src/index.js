@@ -1,7 +1,7 @@
 import parse from './parsers.js';
 import buildDiff from './diffBuilder.js';
-import getFormatter from './formatters/index.js';
-import formatStylish from './formatters/stylish.js';
+import getFormatter from '../formatters/index.js';
+
 
 export default (filepath1, filepath2, formatName = 'stylish') => {
   const data1 = parse(filepath1);
