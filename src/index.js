@@ -1,6 +1,8 @@
 import parse from './parsers.js'
 import buildDiff from './diffBuilder.js'
 import getFormatter from './formatters/index.js'
+import formatPlain from './formatters/plain.js'
+import formatJson from './formatters/json.js'
 
 export default (filepath1, filepath2, formatName = 'stylish') => {
   if (typeof formatName !== 'string') {
