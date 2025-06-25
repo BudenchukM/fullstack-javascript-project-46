@@ -20,7 +20,7 @@ describe('genDiff', () => {
     const expected = readFile('expected.txt').trim()
     const result = genDiff(file1, file2)
     expect(result).toEqual(expected)
-  });
+  })
 
   test('should format diff in plain style', () => {
     const file1 = getFixturePath('file1.json')
