@@ -18,7 +18,7 @@ program
   .action((filepath1, filepath2, options) => {
     try {
       console.log(genDiff(filepath1, filepath2, options.format))
-    } 
+    }
     catch (error) {
       console.error('❌ Error:', error.message)
       console.log('\nUsage example:')
