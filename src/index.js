@@ -18,6 +18,6 @@ export default (filepath1, filepath2, formatName = 'stylish') => {
       return formatJson(diff)
     case 'stylish':
     default:
-      return formatter(diff); // Используем его
+      return formatter(diff)// Используем его
   }
 }

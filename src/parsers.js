@@ -11,18 +11,18 @@ const getFileContent = (filepath) => {
 
   try {
     return readFileSync(absolutePath, 'utf-8')
-  } 
+  }
   catch (error) {
     const fixtureDir = path.join(process.cwd(), '__fixtures__')
     try {
       const files = readdirSync(fixtureDir)
       throw new Error(
-        `Cannot read file at: ${absolutePath}\n` +
-        `Available files in __fixtures__:\n${files.map(f => `- ${f}`).join('\n')}\n` +
-        `Try: gendiff __fixtures__/file1.json __fixtures__/file2.json`
+        `Cannot read file at: ${absolutePath}\n`
+        + `Available files in __fixtures__:\n${files.map(f => `- ${f}`).join('\n')}\n`
+        + `Try: gendiff __fixtures__/file1.json __fixtures__/file2.json`
       )
     } catch (dirError) {
-      throw new Error(`Cannot read file at: ${absolutePath}\nAlso failed to read __fixtures__ directory`);
+      throw new Error(`Cannot read file at: ${absolutePath}\nAlso failed to read __fixtures__ directory`)
     }
   }
 }
