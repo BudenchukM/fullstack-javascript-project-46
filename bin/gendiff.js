@@ -14,7 +14,7 @@ program
   .description('Compares two configuration files and shows a difference.')
   .version(version, '-V, --version', 'output the version number')
   .arguments('<filepath1> <filepath2>')
-  .option('-f, --format <type>', 'output format (stylish, plain)', 'stylish')
+  .option('-f, --format <type>', 'output format (stylish, plain, json)', 'stylish')
   .action((filepath1, filepath2, options) => {
   try {
     console.log(genDiff(filepath1, filepath2, options.format));
