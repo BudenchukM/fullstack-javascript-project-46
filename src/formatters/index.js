@@ -3,9 +3,9 @@ import formatPlain from './plain.js';
 import formatJson from './json.js';
 
 const formatters = {
-  formatStylish,
-  formatPlain,
-  formatJson,
+  stylish: formatStylish,
+  plain: formatPlain,
+  json: formatJson
 };
 
 export default (formatName) => {
