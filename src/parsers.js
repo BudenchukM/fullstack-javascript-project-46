@@ -13,8 +13,9 @@ export default (data, format) => {
   }
 
   try {
-    return parser(data);
-  } catch (error) {
-    throw new Error(`Failed to parse ${format} data: ${error.message}`);
+    return parser(data)
+  } 
+  catch (error) {
+    throw new Error(`Failed to parse ${format} data: ${error.message}`)
   }
 }

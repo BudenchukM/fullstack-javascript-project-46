@@ -2,13 +2,14 @@ import path from 'path'
 import { readFileSync } from 'fs'
 
 export const readFile = (filepath) => {
-  const absolutePath = path.isAbsolute(filepath) 
-    ? filepath 
+  const absolutePath = path.isAbsolute(filepath)
+    ? filepath
     : path.resolve(process.cwd(), filepath)
-  
+
   try {
     return readFileSync(absolutePath, 'utf-8')
-  } catch (error) {
+  } 
+  catch {
     throw new Error(`Cannot read file at: ${absolutePath}`)
   }
 }
