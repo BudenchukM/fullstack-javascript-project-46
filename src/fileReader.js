@@ -8,7 +8,7 @@ export const readFile = (filepath) => {
 
   try {
     return readFileSync(absolutePath, 'utf-8')
-  } 
+  }
   catch {
     throw new Error(`Cannot read file at: ${absolutePath}`)
   }
