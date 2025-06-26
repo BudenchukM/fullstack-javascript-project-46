@@ -12,14 +12,13 @@ export default (filepath1, filepath2, formatName = 'stylish') => {
   const data1 = parse(filepath1)
   const data2 = parse(filepath2)
   const diff = buildDiff(data1, data2)
-  const format = getFormatter(formatName)
-  switch (format) {
+  switch (formatter) {
     case 'plain':
       return formatPlain(diff)
     case 'json':
       return formatJson(diff)
     case 'stylish':
     default:
-      return formatter(diff)// Используем его
+      return formatter(diff)
   }
 }
