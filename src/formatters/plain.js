@@ -5,24 +5,32 @@ const stringify = (value) => {
   return '[complex value]'
 }
 
+const nodeHandlers = {
+  added: (node, currentPath) => 
+    `Property '${currentPath}' was added with value: ${stringify(node.value)}`,
+
+  removed: (node, currentPath) => 
+    `Property '${currentPath}' was removed`,
+
+  changed: (node, currentPath) => 
+    `Property '${currentPath}' was updated. From ${stringify(node.oldValue)} to ${stringify(node.newValue)}`,
+
+  nested: (node, currentPath) => 
+    formatPlain(node.children, currentPath),
+
+  unchanged: () => []
+};
+
 const formatPlain = (diff, path = '') => {
   const lines = diff.flatMap((node) => {
     const currentPath = path ? `${path}.${node.key}` : node.key
+    const handler = nodeHandlers[node.type]
 
-    switch (node.type) {
-      case 'added':
-        return `Property '${currentPath}' was added with value: ${stringify(node.value)}`
-      case 'removed':
-        return `Property '${currentPath}' was removed`
-      case 'changed':
-        return `Property '${currentPath}' was updated. From ${stringify(node.oldValue)} to ${stringify(node.newValue)}`
-      case 'nested':
-        return formatPlain(node.children, currentPath)
-      case 'unchanged':
-        return []
-      default:
-        throw new Error(`Unknown node type: ${node.type}`)
+    if (!handler) {
+      throw new Error(`Unknown node type: ${node.type}`)
     }
+
+    return handler(node, currentPath)
   })
 
   return lines.join('\n')
