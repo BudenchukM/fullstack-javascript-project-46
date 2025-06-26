@@ -11,22 +11,22 @@ const stringify = (value, depth) => {
 }
 
 const formatters = {
-  added: (node, depth, indent) => 
+  added: (node, depth, indent) =>
     `${indent}+ ${node.key}: ${stringify(node.value, depth + 1)}`,
-  
-  removed: (node, depth, indent) => 
+
+  removed: (node, depth, indent) =>
     `${indent}- ${node.key}: ${stringify(node.value, depth + 1)}`,
-  
-  unchanged: (node, depth, indent) => 
+
+  unchanged: (node, depth, indent) =>
     `${indent}  ${node.key}: ${stringify(node.value, depth + 1)}`,
-  
+
   changed: (node, depth, indent) => [
     `${indent}- ${node.key}: ${stringify(node.oldValue, depth + 1)}`,
-    `${indent}+ ${node.key}: ${stringify(node.newValue, depth + 1)}`
+    `${indent}+ ${node.key}: ${stringify(node.newValue, depth + 1)}`,
   ].join('\n'),
-  
-  nested: (node, depth, indent) => 
-    `${indent}  ${node.key}: ${formatStylish(node.children, depth + 1)}`
+
+  nested: (node, depth, indent) =>
+    `${indent}  ${node.key}: ${formatStylish(node.children, depth + 1)}`,
 }
 
 const formatStylish = (diff, depth = 0) => {
@@ -34,7 +34,7 @@ const formatStylish = (diff, depth = 0) => {
   const bracketIndent = ' '.repeat(depth * 4)
 
   const lines = diff.map((node) => {
-    const formatter = formatters[node.type];
+    const formatter = formatters[node.type]
     if (!formatter) {
       throw new Error(`Unknown node type: ${node.type}`)
     }
