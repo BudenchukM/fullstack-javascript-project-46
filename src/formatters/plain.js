@@ -6,20 +6,20 @@ const stringify = (value) => {
 }
 
 const nodeHandlers = {
-  added: (node, currentPath) => 
+  added: (node, currentPath) =>
     `Property '${currentPath}' was added with value: ${stringify(node.value)}`,
 
-  removed: (node, currentPath) => 
+  removed: (node, currentPath) =>
     `Property '${currentPath}' was removed`,
 
-  changed: (node, currentPath) => 
+  changed: (node, currentPath) =>
     `Property '${currentPath}' was updated. From ${stringify(node.oldValue)} to ${stringify(node.newValue)}`,
 
-  nested: (node, currentPath) => 
+  nested: (node, currentPath) =>
     formatPlain(node.children, currentPath),
 
-  unchanged: () => []
-};
+  unchanged: () => [],
+}
 
 const formatPlain = (diff, path = '') => {
   const lines = diff.flatMap((node) => {
